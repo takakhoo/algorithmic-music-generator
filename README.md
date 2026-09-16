@@ -21,8 +21,8 @@ randomness with scale, tempo, section, percussion, and time-stretching rules.
 ## Build and run
 
 ```bash
-git clone https://github.com/takakhoo/Automated-Music-Generator.git
-cd Automated-Music-Generator
+git clone https://github.com/takakhoo/algorithmic-music-generator.git
+cd algorithmic-music-generator
 make
 ./exe
 ```
@@ -55,6 +55,13 @@ This keeps every generated layer synchronized when the tempo changes.
 - `algo_comp_v3_stretched.csd` — time-stretched render variant
 - `composed.aif` — example rendered output
 - `Makefile` — build target and cleanup rules
+
+## Verification
+
+Verified on macOS with Clang on September 16, 2026: `make` completes without
+warnings and the executable writes a valid Csound document. Audio rendering is
+then delegated to `csound`; when it is not installed, the program exits with a
+clear installation message instead of reporting a successful render.
 
 ## Scope
 
