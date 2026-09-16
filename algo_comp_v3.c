@@ -125,9 +125,9 @@ float StepToHerz(int scale, int thisnote) {
     return thisnotehz;
 }
 
-int main(int argc, char* argv[]) {
+int main(void) {
     // Variable declarations
-    int i = 0, e = 0, rep = 0;
+    int i = 0, rep = 0;
     int randnotes[256];
     int x = 0;
     int thisnote;
@@ -145,13 +145,8 @@ int main(int argc, char* argv[]) {
     int flagend;
     float time;       // Section duration (seconds)
     float currenttime = 0;
-    float notevalue;
-    float measurevalue = 0.0;
-    int measurecount = 1;
     char scalename[12];
     // Arrays for storing sequence info (for transposition, if needed)
-    float sequencespeed[256][256];
-    float sequencehz[256][256];
     // Hi-hat variables
     float notespeedhh;
     int divisionpercuarray[256];
@@ -159,8 +154,6 @@ int main(int argc, char* argv[]) {
     float totaltimehh;
     float openorclosed;
     // Kick drum variables (not fully used here)
-    float notespeedkick = 0;
-    float totalkicktime = 0;
     int dacorsf;
     
     // -------------------------------
@@ -323,13 +316,13 @@ retry:
             score:
                 division = rand() % 7;
                 switch(division) {
-                    case 0: notespeed = 60.0/BPM; notevalue = 1.0/4.0; break;
-                    case 1: notespeed = 60.0/BPM; notevalue = 1.0/4.0; break;
-                    case 2: notespeed = 60.0/(BPM*2); notevalue = 1.0/8.0; break;
-                    case 3: notespeed = 60.0/(BPM*2); notevalue = 1.0/8.0; break;
-                    case 4: notespeed = 60.0/(BPM*4); notevalue = 1.0/16.0; break;
-                    case 5: notespeed = 60.0/(BPM*4); notevalue = 1.0/16.0; break;
-                    case 6: notespeed = 60.0/(BPM/2); notevalue = 1.0/2.0; break;
+                    case 0: notespeed = 60.0/BPM; break;
+                    case 1: notespeed = 60.0/BPM; break;
+                    case 2: notespeed = 60.0/(BPM*2); break;
+                    case 3: notespeed = 60.0/(BPM*2); break;
+                    case 4: notespeed = 60.0/(BPM*4); break;
+                    case 5: notespeed = 60.0/(BPM*4); break;
+                    case 6: notespeed = 60.0/(BPM/2); break;
                 }
                 if(currenttime == (time - (60.0/BPM)))
                     notespeed = 1.0;
@@ -366,10 +359,10 @@ retry:
                     }
                     divisionpercu = divisionpercuarray[x];
                     switch(divisionpercu) {
-                        case 0: notespeedhh = 60.0/BPM; notevalue = 1.0/4.0; openorclosed = 0.1; break;
-                        case 1: notespeedhh = 60.0/(BPM*2); notevalue = 1.0/8.0; openorclosed = 0.05; break;
-                        case 2: notespeedhh = 60.0/(BPM*4); notevalue = 1.0/16.0; openorclosed = 0.02; break;
-                        case 3: notespeedhh = 60.0/(BPM*8); notevalue = 1.0/32.0; openorclosed = 0.02; break;
+                        case 0: notespeedhh = 60.0/BPM; openorclosed = 0.1; break;
+                        case 1: notespeedhh = 60.0/(BPM*2); openorclosed = 0.05; break;
+                        case 2: notespeedhh = 60.0/(BPM*4); openorclosed = 0.02; break;
+                        case 3: notespeedhh = 60.0/(BPM*8); openorclosed = 0.02; break;
                     }
                     printf("Hi-hat division: %d\n", divisionpercuarray[x]);
                     fprintf(csdPointer, "i2 %f %f 1 %f\n", totaltimehh, notespeedhh/100, openorclosed);
@@ -410,7 +403,15 @@ retry:
             strcat(cmd_2, csdFileName);
             strcat(commandline, cmd_2);
         }
-        system(commandline);
+        if (system("command -v csound >/dev/null 2>&1") != 0) {
+            fprintf(
+                stderr,
+                "Csound was not found on PATH; generated %s without playback.\n",
+                csdFileName
+            );
+        } else if (system(commandline) != 0) {
+            fprintf(stderr, "Csound exited with an error. The generated score remains at %s.\n", csdFileName);
+        }
     }
     
     // Option for time-stretched version
