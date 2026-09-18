@@ -3,3 +3,4 @@ exe
 __pycache__/
 generated.csd
 results/*.wav
+!results/dorian.wav

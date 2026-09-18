@@ -1,5 +1,8 @@
 # Algorithmic composition in C and Csound
 
+**[Listen to the rendered Dorian example](results/dorian.wav)** (11 seconds,
+including reverb tail), generated and checked by the Linux CI render job.
+
 A deterministic modal melody generator with seven scales, tempo-aware rhythms,
 repeatable sections, percussion, stereo synthesis and reverb. C writes the score;
 Csound renders it. Generating a score never starts audio playback or invokes a shell.
