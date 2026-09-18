@@ -1,0 +1,41 @@
+[
+  {
+    "mode": "ionian",
+    "seed": 7,
+    "bpm": 90,
+    "section_seconds": 4,
+    "sections": 2,
+    "loops": 1,
+    "melody_events": 14,
+    "drum_events": 18,
+    "score_duration_seconds": 8,
+    "reverb_tail_seconds": 3,
+    "sha256": "6a6e69a8125134a681b172a0f267ff71b8bbac778984c8f9c5875ca9db1de897"
+  },
+  {
+    "mode": "dorian",
+    "seed": 7,
+    "bpm": 90,
+    "section_seconds": 4,
+    "sections": 2,
+    "loops": 1,
+    "melody_events": 14,
+    "drum_events": 18,
+    "score_duration_seconds": 8,
+    "reverb_tail_seconds": 3,
+    "sha256": "7e0ecd7be77736cac1871673e1a8669f148bbb004a90082c6c486db67950741b"
+  },
+  {
+    "mode": "aeolian",
+    "seed": 7,
+    "bpm": 90,
+    "section_seconds": 4,
+    "sections": 2,
+    "loops": 1,
+    "melody_events": 14,
+    "drum_events": 18,
+    "score_duration_seconds": 8,
+    "reverb_tail_seconds": 3,
+    "sha256": "87a6dc8bcc214fc39f2b2bc0cf9a6e481cad59970fcc3ec426764dacc70f875a"
+  }
+]

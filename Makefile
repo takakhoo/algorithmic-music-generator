@@ -6,7 +6,7 @@ CFLAGS ?= -std=c11 -O2 -Wall -Wextra
 all: exe
 
 exe: algo_comp_v3.c
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $< -lm
 
 clean:
 	rm -f exe

@@ -1,0 +1,5 @@
+exe
+*.dSYM/
+__pycache__/
+generated.csd
+results/*.wav

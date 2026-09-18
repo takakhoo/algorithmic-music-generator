@@ -1,0 +1,19 @@
+name: Build, sanitize, and render music
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y csound
+      - run: make CFLAGS='-std=c11 -O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined'
+      - run: python3 -m unittest -v test_generator
+      - run: python3 reproduce.py
+      - run: |
+          csound -W -s -o results/dorian.wav results/dorian.csd
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rendered-music
+          path: results/
